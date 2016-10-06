@@ -4,5 +4,6 @@ class pdsh (
   Array   $mod_pkgs   = $pdsh::params::mod_pkgs,
   ) inherits pdsh::params {
 
-  class {'::pdsh::install': }
+  class {'::pdsh::install': } ->
+  class {'::pdsh::generators': }
 }
