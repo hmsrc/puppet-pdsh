@@ -4,7 +4,7 @@ class pdsh::install (
   $mod_pkgs   = $pdsh::mod_pkgs,
   ) {
 
-    packge {$package:
+    package {$package:
       ensure => installed,
     }
     $rcmd_pkgs.each |$rcmd| {
