@@ -1,7 +1,7 @@
 class pdsh::generators (
   $puppetdb_host = 'puppetdb',
   $puppetdb_port = '8080',
-  $output_dir = '/etc/dsg/group',
+  $output_dir = '/etc/dsh/group',
   $queries = {},
   ) {
     #queries shoult be in the format:
