@@ -4,7 +4,8 @@ class pdsh::generators (
   $output_dir = '/etc/dsg/group',
   $queries = {},
   ) {
-
+    #queries shoult be in the format:
+    #{label => label, query=> query}
     #provides the parameters to fill out the queries hash more
     $query_defaults = {
       puppetdb_host => $puppetdb_host ,
@@ -15,8 +16,9 @@ class pdsh::generators (
     create_resources(pdsh_puppet_list,$queries,$query_defaults)
 }
 
-define pdsh_puppet_list($name,$puppetdb_host,$puppetdb_port,$output_dir,$query) {
-  file {"/usr/local/sbin/pdsh_list_${name}.rb":
+
+define pdsh_puppet_list($label,$puppetdb_host,$puppetdb_port,$output_dir,$query) {
+  file {"/usr/local/sbin/pdsh_list_${label}.rb":
     content => template('pdsh/pdsh_list_generator.rb.erb'),
     mode    => '0744',
     owner   => root,
@@ -24,9 +26,9 @@ define pdsh_puppet_list($name,$puppetdb_host,$puppetdb_port,$output_dir,$query) 
   }
 
   #cron to update list every 30
-  cron { "update_pdsh_list_${name}":
+  cron { "update_pdsh_list_${label}":
     minute  => '*/30',
-    command => "/usr/local/sbin/pdsh_list_${name}.rb > /dev/null 2>&1",
+    command => "/usr/local/sbin/pdsh_list_${label}.rb > /dev/null 2>&1",
     user    => root,
   }
 }
