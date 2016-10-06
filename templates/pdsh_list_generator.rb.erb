@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'pp'
+
+@puppetdb_host = '<%= @puppetdb_host %>'
+@puppetdb_port  = '<%= @puppetdb_port %>'
+@outputdir = '<%= @output_dir %>'
+@outputfile = '<%= @name %>'
+
+
+query = '<%= @query %>'
+
+curl_cmd = "curl -s -X POST http://#{@puppetdb_host}:#{@puppetdb_port}/pdb/query/v4/nodes -H 'Content-Type:application/json' -d '{\"query\":#{query}}'"
+
+output = JSON.parse(`#{curl_cmd}`)
+
+pp output
+
+nodes = Array.new
+output.each do |node|
+  name=node["certname"]
+  nodes.push(name)
+end
+
+dsh_group=File.open("#{@outputdir}/#{@outputfile}",'w')
+nodes.each do |node|
+  dsh_group.puts node
+end
