@@ -13,12 +13,6 @@ class pdsh::generators (
       output_dir    => $output_dir,
     }
 
-    output_dirs = split($output_dir, '/')
-
-    file { "${output_dirs}":
-      ensure => directory,
-    }
-
     create_resources(pdsh_puppet_list,$queries,$query_defaults)
 }
 
