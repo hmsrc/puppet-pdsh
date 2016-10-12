@@ -12,6 +12,9 @@ class pdsh::generators (
       puppetdb_port => $puppetdb_port,
       output_dir    => $output_dir,
     }
+    file { "${output_dir}":
+      ensure => directory,
+    }
 
     create_resources(pdsh_puppet_list,$queries,$query_defaults)
 }
