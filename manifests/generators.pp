@@ -12,7 +12,10 @@ class pdsh::generators (
       puppetdb_port => $puppetdb_port,
       output_dir    => $output_dir,
     }
-    file { "${output_dir}":
+
+    output_dirs = split($output_dir, '/')
+
+    file { "${output_dirs}":
       ensure => directory,
     }
 
