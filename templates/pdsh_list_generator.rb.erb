@@ -20,6 +20,8 @@ output.each do |node|
   nodes.push(name)
 end
 
+nodes=nodes.sort!
+
 dsh_group=File.open("#{@outputdir}/#{@outputfile}",'w')
 nodes.each do |node|
   dsh_group.puts node
