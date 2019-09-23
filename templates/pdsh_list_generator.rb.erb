@@ -20,7 +20,7 @@ output.each do |node|
   nodes.push(name)
 end
 
-nodes=nodes.sort!
+nodes=nodes.uniq.sort!
 
 dsh_group=File.open("#{@outputdir}/#{@outputfile}",'w')
 nodes.each do |node|
