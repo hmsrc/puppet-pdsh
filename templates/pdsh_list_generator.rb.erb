@@ -6,11 +6,11 @@ require 'json'
 @puppetdb_port  = '<%= @puppetdb_port %>'
 @outputdir = '<%= @output_dir %>'
 @outputfile = '<%= @label%>'
-
+@endpoint = '<%= @endpoint %>'
 
 query = '<%= @query %>'
 
-curl_cmd = "curl -s -X POST http://#{@puppetdb_host}:#{@puppetdb_port}/pdb/query/v4/nodes -H 'Content-Type:application/json' -d '{\"query\":#{query}}'"
+curl_cmd = "curl -s -X POST http://#{@puppetdb_host}:#{@puppetdb_port}/pdb/query/v4/#{@endpoint} -H 'Content-Type:application/json' -d '{\"query\":#{query}}'"
 
 output = JSON.parse(`#{curl_cmd}`)
 
