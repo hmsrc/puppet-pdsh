@@ -25,7 +25,8 @@ define pdsh_puppet_list(String $label,
                         String $puppetdb_port,
                         String $output_dir,
                         String $endpoint,
-                        String $query) {
+                        String $query,
+  ) {
   file {"/usr/local/sbin/pdsh_list_${label}.rb":
     content => template('pdsh/pdsh_list_generator.rb.erb'),
     mode    => '0744',
