@@ -1,3 +1,4 @@
+# create pdsh files
 class pdsh::generators (
   $puppetdb_host = 'puppetdb',
   $puppetdb_port = '8080',
@@ -18,7 +19,7 @@ class pdsh::generators (
     create_resources(pdsh_puppet_list,$queries,$query_defaults)
 }
 
-
+# generate script from template that queries the puppet database
 define pdsh_puppet_list(String $label,
                         String $puppetdb_host,
                         String $puppetdb_port,
