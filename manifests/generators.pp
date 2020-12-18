@@ -19,7 +19,12 @@ class pdsh::generators (
 }
 
 
-define pdsh_puppet_list($label,$puppetdb_host,$puppetdb_port,$output_dir,$endpoint,$query) {
+define pdsh_puppet_list(String $label,
+                        String $puppetdb_host,
+                        String $puppetdb_port,
+                        String $output_dir,
+                        String $endpoint,
+                        String $query) {
   file {"/usr/local/sbin/pdsh_list_${label}.rb":
     content => template('pdsh/pdsh_list_generator.rb.erb'),
     mode    => '0744',
