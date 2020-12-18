@@ -16,11 +16,11 @@ class pdsh::generators (
       endpoint      => $endpoint,
     }
 
-    create_resources(pdsh_puppet_list,$queries,$query_defaults)
+    create_resources(pdsh_list,$queries,$query_defaults)
 }
 
 # generate script from template that queries the puppet database
-define pdsh_puppet_list(String $label,
+define pdsh_list(String $label,
                         String $puppetdb_host,
                         String $puppetdb_port,
                         String $output_dir,
